@@ -19,7 +19,8 @@ export function applicationHttpClientCreator(http: HttpClient) {
 @Injectable()
 export class ApplicationHttpClient {
 
-  private api = 'https://someurl.example';
+  // private api = 'https://someurl.example';
+  private api = '';
 
   // Extending the HttpClient through the Angular DI.
   public constructor(public http: HttpClient) {
