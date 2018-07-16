@@ -1,4 +1,4 @@
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams, HttpHandler } from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 
@@ -12,19 +12,14 @@ export interface IRequestOptions {
   body?: any;
 }
 
-export function applicationHttpClientCreator(http: HttpClient) {
-  return new ApplicationHttpClient(http);
+export function applicationHttpClientCreator(httpHandler: HttpHandler) {
+  return new ApplicationHttpClient(httpHandler);
 }
 
 @Injectable()
-export class ApplicationHttpClient {
+export class ApplicationHttpClient extends HttpClient {
 
-  // private api = 'https://someurl.example';
   private api = '';
-
-  // Extending the HttpClient through the Angular DI.
-  public constructor(public http: HttpClient) {
-  }
 
   /**
    * GET request
@@ -34,7 +29,7 @@ export class ApplicationHttpClient {
    * @returns {Observable<T>}
    */
   public Get<T>(endPoint: string, options?: IRequestOptions): Observable<T> {
-    return this.http.get<T>(this.api + endPoint, options);
+    return this.get<T>(this.api + endPoint, options);
   }
 
   /**
@@ -45,7 +40,7 @@ export class ApplicationHttpClient {
    * @returns {Observable<T>}
    */
   public Post<T>(endPoint: string, params: Object, options?: IRequestOptions): Observable<T> {
-    return this.http.post<T>(this.api + endPoint, params, options);
+    return this.post<T>(this.api + endPoint, params, options);
   }
 
   /**
@@ -56,7 +51,7 @@ export class ApplicationHttpClient {
    * @returns {Observable<T>}
    */
   public Put<T>(endPoint: string, params: Object, options?: IRequestOptions): Observable<T> {
-    return this.http.put<T>(this.api + endPoint, params, options);
+    return this.put<T>(this.api + endPoint, params, options);
   }
 
   /**
@@ -66,6 +61,6 @@ export class ApplicationHttpClient {
    * @returns {Observable<T>}
    */
   public Delete<T>(endPoint: string, options?: IRequestOptions): Observable<T> {
-    return this.http.delete<T>(this.api + endPoint, options);
+    return this.delete<T>(this.api + endPoint, options);
   }
 }

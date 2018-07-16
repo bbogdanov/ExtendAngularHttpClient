@@ -2,10 +2,9 @@ import { ApplicationHttpClient, applicationHttpClientCreator } from './http-clie
 import { ServerLocationInterceptor } from './server-location.interceptor';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpHandler } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,7 @@ import { HttpClient } from '@angular/common/http';
     {
       provide: ApplicationHttpClient,
       useFactory: applicationHttpClientCreator,
-      deps: [HttpClient]
+      deps: [HttpHandler]
     },
   ],
   bootstrap: [AppComponent]
