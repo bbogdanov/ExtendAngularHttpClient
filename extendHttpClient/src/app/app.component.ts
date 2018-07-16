@@ -1,4 +1,5 @@
 import { ApplicationHttpClient } from './http-client';
+import {HttpClient} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  constructor(private httpClient: ApplicationHttpClient) {
-
+  constructor(private httpClient: HttpClient) {
+    console.log('Is HttpClient instance of ApplicationHttpClient: ', httpClient instanceof ApplicationHttpClient);
   }
 
   public ngOnInit() {
